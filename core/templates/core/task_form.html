@@ -1,10 +1,62 @@
 {% extends 'core/base.html' %}
+
 {% block content %}
-<h2>Task Form</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-    <a href="{% url 'task_list' %}" class="button">Cancel</a>
-</form>
+<div style="max-width: 500px; margin-top: 50px; margin-left: auto; margin-right: auto;">
+    <div style="background-color: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 15px;">Add Task</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 15px;">
+                {% for field in form %}
+                    <div style="margin-bottom: 12px;">
+                        <label for="{{ field.id }}" style="font-size: 14px; font-weight: bold; display: block; margin-bottom: 5px;">
+                            {{ field.label }}
+                        </label>
+
+                        <div style="width: 100%; max-width: 100%;">
+                            {{ field }}
+                        </div>
+
+                        {% if field.errors %}
+                            <div style="color: red; font-size: 12px; margin-top: 5px;">
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; gap: 10px;">
+                <button type="submit" style="font-size: 14px; padding: 10px 15px; border-radius: 5px; background-color: #007bff; color: white; border: none; width: 48%; transition: background-color 0.3s ease; cursor: pointer;">Save</button>
+                <a href="{% url 'task_list' %}" class="button" style="font-size: 14px; padding: 10px 15px; border-radius: 5px; background-color: #f0f0f0; color: #333; text-decoration: none; display: inline-block; width: 48%; text-align: center; border: 1px solid #ddd; transition: background-color 0.3s ease; cursor: pointer;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 {% endblock %}
