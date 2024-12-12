@@ -5,6 +5,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login
 from .forms import CustomUserCreationForm, TaskForm
 from .models import Task
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+
+
 
 def signup(request):
     if request.method == 'POST':
@@ -50,3 +54,9 @@ def task_delete(request, pk):
         return redirect('task_list')
     return render(request, 'core/task_confirm_delete.html', {'task': task})
 
+
+# View to redirect users to the login page if not authenticated
+def redirect_to_login(request):
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirect to the login page if not logged in
+    return redirect('task_list')  # Redirect to task list if user is authenticated

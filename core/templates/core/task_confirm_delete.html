@@ -1,9 +1,21 @@
 {% extends 'core/base.html' %}
 {% block content %}
-<h2>Confirm Delete</h2>
-<p>Are you sure you want to delete "{{ task.title }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, Delete</button>
-</form>
+<div class="container mt-5" style="max-width: 600px; text-align: center;">
+    <h2 class="mb-4" style="font-size: 28px; font-weight: bold;">Confirm Deletion</h2>
+
+    <p style="font-size: 16px; color: #555;">Are you sure you want to delete the task "<strong>{{ task.title }}</strong>"?</p>
+
+    <div class="mt-4">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg" style="padding: 10px 20px; font-size: 16px; width: 200px;">
+                Yes, Delete
+            </button>
+        </form>
+        <br><br>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary btn-lg" style="padding: 10px 20px; font-size: 16px; width: 200px;">
+            Cancel
+        </a>
+    </div>
+</div>
 {% endblock %}
