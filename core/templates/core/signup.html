@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin-top: 50px; margin-left: auto; margin-right: auto;">
+    <div style="background-color: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 30px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 20px;">Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" style="font-size: 16px; padding: 12px; border-radius: 5px; background-color: #007bff; color: white; width: 100%; border: none; transition: background-color 0.3s ease;">Sign Up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
